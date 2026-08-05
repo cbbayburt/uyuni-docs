@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2239,7 +2242,7 @@ Debug logs can contain sensitive operational data; protect and remove them accor
 <tbody>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">HTTP 401 or 403 during SUSE Multi-Linux Manager login</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">For basic authentication, verify <code>UYUNI_USER</code>, <code>UYUNI_PASS</code>, account status, and permissions. For OAuth, verify issuer, audiences, scopes, user-name claim, and the matching active SUSE Multi-Linux Manager user.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For basic authentication, verify <code>UYUNI_USER</code>, <code>UYUNI_PASS</code>, account status, and permissions. For OAuth, verify issuer, audiences, scopes, username claim, and the matching active SUSE Multi-Linux Manager user.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">OAuth discovery or token validation fails</p></td>
@@ -2247,7 +2250,7 @@ Debug logs can contain sensitive operational data; protect and remove them accor
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">MCP authentication succeeds but SUSE Multi-Linux Manager OIDC login fails</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure the token includes both <code>mcp-server-uyuni</code> and <code>uyuni-server</code> audiences, includes <code>sub</code>, and contains the configured user-name claim.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ensure the token includes both <code>mcp-server-uyuni</code> and <code>uyuni-server</code> audiences, includes <code>sub</code>, and contains the configured username claim.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock">A read tool is available but a write tool is missing</p></td>

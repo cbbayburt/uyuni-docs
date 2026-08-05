@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2203,7 +2206,7 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>UYUNI_USER</code></p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">For basic auth</p></td>
 <td class="tableblock halign-left valign-top"><p class="tableblock">-</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">SUSE Multi-Linux Manager user name. Use with <code>UYUNI_PASS</code> for stdio or another trusted local deployment.</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">SUSE Multi-Linux Manager user name. Use with <code>UYUNI_PASS</code> when <code>UYUNI_AUTH_SERVER</code> is not set.</p></td>
 </tr>
 <tr>
 <td class="tableblock halign-left valign-top"><p class="tableblock"><code>UYUNI_PASS</code></p></td>
@@ -2402,6 +2405,9 @@ Prefer a protected environment file or a secrets-management system.</p>
 <div class="sect1">
 <h2 id="_example_read_only_configuration"><a class="anchor" href="#_example_read_only_configuration"></a><a class="link" href="#_example_read_only_configuration">5. Example read-only configuration</a></h2>
 <div class="sectionbody">
+<div class="paragraph">
+<p>The following example uses basic authentication with <code>UYUNI_USER</code> and <code>UYUNI_PASS</code>.</p>
+</div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ini hljs" data-lang="ini">UYUNI_SERVER=https://server.example.com

@@ -9,7 +9,7 @@
     <link rel="next" href="autoinst-intro.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
-<meta http-equiv="last-modified" content="2023-11-23"/>
+<meta http-equiv="last-modified" content="2026-08-03"/>
 <link rel="stylesheet" href="../../_/css/search.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="../../_/css/font-styles.css">
@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2174,15 +2177,41 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 Every client can have both a base system type, and an add-on system type assigned.</p>
 </div>
 <div class="paragraph">
-<p>Base system type is <code>Salt</code> for all clients.</p>
+<p>Base system type is <code>Salt</code> for all clients.</p>
 </div>
 <div class="paragraph">
-<p>Add-on system types include <code>Virtualization Host</code>, for clients that operate as virtual hosts,
-and <code>Container Build Host</code> for clients that operate as a build host.</p>
+<p>Add-on system types include:</p>
 </div>
-<div class="paragraph">
-<p>You can adjust the add-on system type by navigating to <span class="menuseq"><b class="menu">Systems</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">System List</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">System Types</b></span>.
-Check the clients you want to change the add-on system type for, select the <code>Add-On System Type</code>, and click either <b class="button">Add System Type</b> or <b class="button">Remove System Type</b>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p><code>Virtualization Host</code>: Assigned to clients that operate as physical virtual hosts/hypervisors (such as KVM). Setting this system type is required to allow the daily Taskomatic job to query the system directly (via <code>libvirt</code>) and inventory its running virtual machines for display under <span class="menuseq"><b class="menu">Systems</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">System List</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Virtual Systems</b></span> and for subscription matching.</p>
+</li>
+<li>
+<p><code>Container Build Host</code>: Assigned to clients that operate as a build host.</p>
+</li>
+</ul>
+</div>
+<div class="quoteblock procedure">
+<div class="title">Adjust the add-on system type</div>
+<blockquote>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>In the SUSE Multi-Linux Manager Web UI, navigate to <span class="menuseq"><b class="menu">Systems</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">System List</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">System Types</b></span>.</p>
+</li>
+<li>
+<p>Check the clients you want to change the add-on system type for.</p>
+</li>
+<li>
+<p>Select the <code>Add-On System Type</code>.</p>
+</li>
+<li>
+<p>Click either <b class="button">Add System Type</b> or <b class="button">Remove System Type</b>.</p>
+</li>
+</ol>
+</div>
+</blockquote>
 </div>
 </div>
 </div>

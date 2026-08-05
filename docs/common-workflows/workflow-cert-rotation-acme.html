@@ -3,13 +3,14 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Bootstrap repository :: SUSE Multi-Linux Manager 5.2 Documentation</title>
-    <link rel="canonical" href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/client-configuration/bootstrap-repository.html">
-    <link rel="prev" href="appstreams.html">
-    <link rel="next" href="activation-keys.html">
+    <title>Set up and rotate certificates using ACME :: SUSE Multi-Linux Manager 5.2 Documentation</title>
+    <link rel="canonical" href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/common-workflows/workflow-cert-rotation-acme.html">
+    <link rel="prev" href="workflow-product-upgrade-webui.html">
+    <link rel="next" href="../specialized-guides/specialized-guides-overview.html">
+    <meta name="description" content="Setup and automatic rotation of third-party SSL/TLS certificates using the ACME protocol in containerized environments.">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
-<meta http-equiv="last-modified" content="2025-02-06"/>
+<meta http-equiv="last-modified" content="2026-07-29"/>
 <link rel="stylesheet" href="../../_/css/search.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="../../_/css/font-styles.css">
@@ -40,14 +41,14 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   setAssetPath("https://d12w0ryu9hjsx8.cloudfront.net/shared-header/1.10/assets");
 </script>
 
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/client-configuration/bootstrap-repository.html" rel="canonical"/>
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/client-configuration/bootstrap-repository.html" hreflang="x-default" rel="alternate"/>
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/client-configuration/bootstrap-repository.html" hreflang="en-US" rel="alternate" />
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/ko/docs/client-configuration/bootstrap-repository.html" hreflang="ko-kr"
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/common-workflows/workflow-cert-rotation-acme.html" rel="canonical"/>
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/common-workflows/workflow-cert-rotation-acme.html" hreflang="x-default" rel="alternate"/>
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/en/docs/common-workflows/workflow-cert-rotation-acme.html" hreflang="en-US" rel="alternate" />
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/ko/docs/common-workflows/workflow-cert-rotation-acme.html" hreflang="ko-kr"
     rel="alternate" />
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/ja/docs/client-configuration/bootstrap-repository.html" hreflang="ja-JP"
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/ja/docs/common-workflows/workflow-cert-rotation-acme.html" hreflang="ja-JP"
     rel="alternate" />
-<link href="https://documentation.suse.com/multi-linux-manager/5.2/zh_CN/docs/client-configuration/bootstrap-repository.html" hreflang="zh-CN"
+<link href="https://documentation.suse.com/multi-linux-manager/5.2/zh_CN/docs/common-workflows/workflow-cert-rotation-acme.html" hreflang="zh-CN"
     rel="alternate" />
 <shared-header page-title="Pattern Library" logo-src="https://www.suse.com/assets/img/suse-white-logo-green.svg"
             language="en" user="the name" log-in-url="#" log-out-url="#" log-out-method="DELETE" create-account-url="#"
@@ -64,6 +65,45 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <script src="../../_/js/qualatrix.js" defer></script>
 
 <!-- JSON-LD for doc metadata -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+
+  "headline": "Set up and rotate certificates using ACME",
+  "description": "Setup and automatic rotation of third-party SSL/TLS certificates using the ACME protocol in containerized environments.",
+  "inLanguage": "LANG_PLACEHOLDER",
+
+  "dateModified": "2026-07-29",
+
+  "image": "https://www.suse.com/assets/img/suse-white-logo-green.svg",
+
+  "author": {
+    "@type": "Organization",
+    "name": "SUSE Product &amp;amp; Solution Documentation Team"
+  },
+
+  "mentions": [
+    {
+      "@type": "SoftwareApplication",
+      "name": "SUSE Multi-Linux Manager",
+      "softwareVersion": "5.2",
+      "applicationCategory": "Operating System",
+      "operatingSystem": "Linux"
+    }
+  ],
+
+  "publisher": {
+    "@type": "Organization",
+    "name": "SUSE",
+    "url": "https://documentation.suse.com",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://www.suse.com/assets/img/suse-white-logo-green.svg"
+    }
+  }
+}
+</script>
     <script>var uiRootPath = '../../_'</script>
   </head>
   <body class="article">
@@ -223,276 +263,276 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="client-config-overview.html">Client Configuration Guide</a>
+    <a class="nav-link" href="../client-configuration/client-config-overview.html">Client Configuration Guide</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="supported-features.html">Supported Clients and Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features.html">Supported Clients and Features</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-sles.html">SLES and openSUSE Leap Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-sles.html">SLES and openSUSE Leap Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-sle-micro.html">SLE Micro Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-sle-micro.html">SLE Micro Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-sl-micro.html">SL Micro Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-sl-micro.html">SL Micro Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-sll.html">SUSE Liberty Linux Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-sll.html">SUSE Liberty Linux Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-almalinux.html">AlmaLinux Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-almalinux.html">AlmaLinux Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-amazon.html">Amazon Linux Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-amazon.html">Amazon Linux Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-centos.html">CentOS Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-centos.html">CentOS Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-debian.html">Debian Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-debian.html">Debian Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-openeuler.html">openEuler Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-openeuler.html">openEuler Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-oes.html">OES Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-oes.html">OES Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-oracle.html">Oracle Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-oracle.html">Oracle Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-raspberrypios.html">Raspberry Pi OS Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-raspberrypios.html">Raspberry Pi OS Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-rh.html">Red Hat Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-rh.html">Red Hat Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-rocky.html">Rocky Linux Supported Features</a>
+    <a class="nav-link" href="../client-configuration/supported-features-rocky.html">Rocky Linux Supported Features</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="supported-features-ubuntu.html">Ubuntu Supported Features</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="configuration-basics.html">Configuration Basics</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="channels.html">Software Channels</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="repositories.html">Software Repositories</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="products.html">Software Products</a>
-  </li>
-  <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="appstreams.html">AppStreams</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item is-current-page" data-depth="3">
-    <a class="nav-link" href="bootstrap-repository.html">Bootstrap Repository</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="activation-keys.html">Activation Keys</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="gpg-keys.html">GPG Keys</a>
+    <a class="nav-link" href="../client-configuration/supported-features-ubuntu.html">Ubuntu Supported Features</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="contact-methods-intro.html">Client Contact Methods</a>
+    <a class="nav-link" href="../client-configuration/configuration-basics.html">Configuration Basics</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="contact-methods-default.html">Default (Salt)</a>
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client-configuration/channels.html">Software Channels</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../client-configuration/repositories.html">Software Repositories</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../client-configuration/products.html">Software Products</a>
+  </li>
+  <li class="nav-item" data-depth="4">
+    <a class="nav-link" href="../client-configuration/appstreams.html">AppStreams</a>
+  </li>
+</ul>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="contact-methods-saltssh.html">SSH Push</a>
+    <a class="nav-link" href="../client-configuration/bootstrap-repository.html">Bootstrap Repository</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="contact-methods-saltssh-tunnel.html">SSH Push (With Tunnel)</a>
+    <a class="nav-link" href="../client-configuration/activation-keys.html">Activation Keys</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="contact-methods-saltbundle.html">Salt Bundle</a>
+    <a class="nav-link" href="../client-configuration/gpg-keys.html">GPG Keys</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview.html">Client Registration</a>
+    <a class="nav-link" href="../client-configuration/contact-methods-intro.html">Client Contact Methods</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/contact-methods-default.html">Default (Salt)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/contact-methods-saltssh.html">SSH Push</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/contact-methods-saltssh-tunnel.html">SSH Push (With Tunnel)</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/contact-methods-saltbundle.html">Salt Bundle</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client-configuration/registration-overview.html">Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-methods.html">Registration Methods</a>
+    <a class="nav-link" href="../client-configuration/registration-methods.html">Registration Methods</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="registration-webui.html">Register With the Web UI</a>
+    <a class="nav-link" href="../client-configuration/registration-webui.html">Register With the Web UI</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="registration-bootstrap.html">Register With a Bootstrap Script</a>
+    <a class="nav-link" href="../client-configuration/registration-bootstrap.html">Register With a Bootstrap Script</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="registration-cli.html">Register on the Command Line</a>
+    <a class="nav-link" href="../client-configuration/registration-cli.html">Register on the Command Line</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-suse.html">SUSE Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-suse.html">SUSE Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-sle.html">SUSE Linux Enterprise Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-sle.html">SUSE Linux Enterprise Clients</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-slemicro.html">SLE Micro Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-slemicro.html">SLE Micro Clients</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-slmicro.html">SL Micro Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-slmicro.html">SL Micro Clients</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-sleses.html">SUSE Liberty Linux Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-sleses.html">SUSE Liberty Linux Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-opensuse.html">openSUSE Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-opensuse.html">openSUSE Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-opensuseleap.html">openSUSE Leap Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-opensuseleap.html">openSUSE Leap Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-almalinux.html">AlmaLinux Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-almalinux.html">AlmaLinux Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-almalinux.html">AlmaLinux Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-almalinux.html">AlmaLinux Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-amazon.html">Amazon Linux Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-amazon.html">Amazon Linux Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-amazon.html">Amazon Linux Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-amazon.html">Amazon Linux Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-centos.html">CentOS Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-centos.html">CentOS Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-centos.html">CentOS Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-centos.html">CentOS Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-debian.html">Debian Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-debian.html">Debian Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-debian.html">Debian Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-debian.html">Debian Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-openeuler.html">openEuler Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-openeuler.html">openEuler Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-openeuler.html">openEuler Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-openeuler.html">openEuler Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-oes.html">OES Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-oes.html">OES Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-oes.html">Open Enterprise Server Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-oes.html">Open Enterprise Server Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-oracle.html">Oracle Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-oracle.html">Oracle Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-oracle.html">Oracle Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-oracle.html">Oracle Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-raspberrypios.html">Raspberry Pi OS Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-raspberrypios.html">Raspberry Pi OS Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-raspberrypios.html">Raspberry Pi OS Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-raspberrypios.html">Raspberry Pi OS Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-redhat.html">Red Hat Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-redhat.html">Red Hat Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-rh-cdn.html">Red Hat Clients - CDN</a>
+    <a class="nav-link" href="../client-configuration/clients-rh-cdn.html">Red Hat Clients - CDN</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-rh-rhui.html">Red Hat Clients - RHUI</a>
+    <a class="nav-link" href="../client-configuration/clients-rh-rhui.html">Red Hat Clients - RHUI</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-rocky.html">Rocky Linux Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-rocky.html">Rocky Linux Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-rocky.html">Rocky Linux Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-rocky.html">Rocky Linux Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="registration-overview-ubuntu.html">Ubuntu Client Registration</a>
+    <a class="nav-link" href="../client-configuration/registration-overview-ubuntu.html">Ubuntu Client Registration</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="clients-ubuntu.html">Ubuntu Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-ubuntu.html">Ubuntu Clients</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="client-proxy.html">Client Registration to a Proxy</a>
+    <a class="nav-link" href="../client-configuration/client-proxy.html">Client Registration to a Proxy</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="client-proxy-webui.html">Register to a Proxy With the Web UI</a>
+    <a class="nav-link" href="../client-configuration/client-proxy-webui.html">Register to a Proxy With the Web UI</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="client-proxy-cli.html">Register to a Proxy With CLI</a>
+    <a class="nav-link" href="../client-configuration/client-proxy-cli.html">Register to a Proxy With CLI</a>
   </li>
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="client-proxy-script.html">Register to a Proxy With a Script</a>
+    <a class="nav-link" href="../client-configuration/client-proxy-script.html">Register to a Proxy With a Script</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="3">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="clients-pubcloud.html">Public Cloud Clients</a>
+    <a class="nav-link" href="../client-configuration/clients-pubcloud.html">Public Cloud Clients</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="4">
-    <a class="nav-link" href="automatic-client-registration.html">Automatic Registration of Clients Created by Terraform</a>
+    <a class="nav-link" href="../client-configuration/automatic-client-registration.html">Automatic Registration of Clients Created by Terraform</a>
   </li>
 </ul>
   </li>
@@ -500,100 +540,100 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="client-upgrades.html">Client Upgrades</a>
+    <a class="nav-link" href="../client-configuration/client-upgrades.html">Client Upgrades</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="client-upgrades-major.html">Major Version Upgrade</a>
+    <a class="nav-link" href="../client-configuration/client-upgrades-major.html">Major Version Upgrade</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="client-upgrades-lifecycle.html">Upgrade Using the Content Lifecycle Manager</a>
+    <a class="nav-link" href="../client-configuration/client-upgrades-lifecycle.html">Upgrade Using the Content Lifecycle Manager</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="client-upgrades-product-migration.html">Product Migration</a>
+    <a class="nav-link" href="../client-configuration/client-upgrades-product-migration.html">Product Migration</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="delete-clients.html">Client Deletion</a>
+    <a class="nav-link" href="../client-configuration/delete-clients.html">Client Deletion</a>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="client-operations.html">Client Operations</a>
+    <a class="nav-link" href="../client-configuration/client-operations.html">Client Operations</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="package-management.html">Package Management</a>
+    <a class="nav-link" href="../client-configuration/package-management.html">Package Management</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="patch-management.html">Patch Management</a>
+    <a class="nav-link" href="../client-configuration/patch-management.html">Patch Management</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="system-locking.html">System Locking</a>
+    <a class="nav-link" href="../client-configuration/system-locking.html">System Locking</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="configuration-management.html">Configuration Management</a>
+    <a class="nav-link" href="../client-configuration/configuration-management.html">Configuration Management</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="power-management.html">Power Management</a>
+    <a class="nav-link" href="../client-configuration/power-management.html">Power Management</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="custom-info.html">Custom System Information</a>
+    <a class="nav-link" href="../client-configuration/custom-info.html">Custom System Information</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="system-set-manager.html">System Set Manager</a>
+    <a class="nav-link" href="../client-configuration/system-set-manager.html">System Set Manager</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="system-groups.html">System Groups</a>
+    <a class="nav-link" href="../client-configuration/system-groups.html">System Groups</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="system-types.html">System Types</a>
-  </li>
-</ul>
-  </li>
-  <li class="nav-item" data-depth="2">
-    <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="autoinst-intro.html">Operating System Installation</a>
-<ul class="nav-list">
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-reinstall.html">Reinstall Registered Systems</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-pxeboot.html">Install via the Network (PXE Boot)</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-cdrom.html">Install via a CD-ROM or a USB Key</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-distributions.html">Autoinstallable Distributions</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-profiles.html">Autoinstallation Profiles</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-unattended.html">Unattended Provisioning</a>
-  </li>
-  <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="autoinst-owngpgkey.html">Use Your Own GPG Key</a>
+    <a class="nav-link" href="../client-configuration/system-types.html">System Types</a>
   </li>
 </ul>
   </li>
   <li class="nav-item" data-depth="2">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="vhm.html">Virtual Host Managers</a>
+    <a class="nav-link" href="../client-configuration/autoinst-intro.html">Operating System Installation</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vhm-aws.html">VHM and AWS</a>
+    <a class="nav-link" href="../client-configuration/autoinst-reinstall.html">Reinstall Registered Systems</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vhm-azure.html">VHM and Azure</a>
+    <a class="nav-link" href="../client-configuration/autoinst-pxeboot.html">Install via the Network (PXE Boot)</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vhm-nutanix.html">VHM and Nutanix</a>
+    <a class="nav-link" href="../client-configuration/autoinst-cdrom.html">Install via a CD-ROM or a USB Key</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vhm-vmware.html">VHM and VMware</a>
+    <a class="nav-link" href="../client-configuration/autoinst-distributions.html">Autoinstallable Distributions</a>
   </li>
   <li class="nav-item" data-depth="3">
-    <a class="nav-link" href="vhm-file.html">VHM With Other Hosts</a>
+    <a class="nav-link" href="../client-configuration/autoinst-profiles.html">Autoinstallation Profiles</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/autoinst-unattended.html">Unattended Provisioning</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/autoinst-owngpgkey.html">Use Your Own GPG Key</a>
+  </li>
+</ul>
+  </li>
+  <li class="nav-item" data-depth="2">
+    <button class="nav-item-toggle"></button>
+    <a class="nav-link" href="../client-configuration/vhm.html">Virtual Host Managers</a>
+<ul class="nav-list">
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/vhm-aws.html">VHM and AWS</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/vhm-azure.html">VHM and Azure</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/vhm-nutanix.html">VHM and Nutanix</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/vhm-vmware.html">VHM and VMware</a>
+  </li>
+  <li class="nav-item" data-depth="3">
+    <a class="nav-link" href="../client-configuration/vhm-file.html">VHM With Other Hosts</a>
   </li>
 </ul>
   </li>
@@ -1734,46 +1774,46 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 <ul class="nav-list">
   <li class="nav-item" data-depth="1">
     <button class="nav-item-toggle"></button>
-    <a class="nav-link" href="../common-workflows/common-workflows-overview.html">Common Workflows</a>
+    <a class="nav-link" href="common-workflows-overview.html">Common Workflows</a>
 <ul class="nav-list">
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-client-onboarding.html">Client Onboarding</a>
+    <a class="nav-link" href="workflow-client-onboarding.html">Client Onboarding</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-clients-update-rec-actions.html">Clients Update with Recurring Actions</a>
+    <a class="nav-link" href="workflow-clients-update-rec-actions.html">Clients Update with Recurring Actions</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-configuration-management.html">Configuration Management</a>
+    <a class="nav-link" href="workflow-configuration-management.html">Configuration Management</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-content-lifecycle-management.html">Content Lifecycle Management</a>
+    <a class="nav-link" href="workflow-content-lifecycle-management.html">Content Lifecycle Management</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-inplace-sles-upgrade.html">In-place Upgrade</a>
+    <a class="nav-link" href="workflow-inplace-sles-upgrade.html">In-place Upgrade</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-install-from-raw-image.html">Installation Using RAW Image</a>
+    <a class="nav-link" href="workflow-install-from-raw-image.html">Installation Using RAW Image</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-install-from-selfinstall-on-ppc.html">Install SUSE Multi-Linux Manager on ppc64le</a>
+    <a class="nav-link" href="workflow-install-from-selfinstall-on-ppc.html">Install SUSE Multi-Linux Manager on ppc64le</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-liberate-rhel-with-secureboot.html">Liberate Red Hat Enterprise Linux with secure boot</a>
+    <a class="nav-link" href="workflow-liberate-rhel-with-secureboot.html">Liberate Red Hat Enterprise Linux with secure boot</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-switch-to-new-client-tools-channels.html">Switch to new client tools channels</a>
+    <a class="nav-link" href="workflow-switch-to-new-client-tools-channels.html">Switch to new client tools channels</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-customize-apache-config.html">Customize Apache Configuration</a>
+    <a class="nav-link" href="workflow-customize-apache-config.html">Customize Apache Configuration</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-customize-security-policies.html">Customize security policies on the server</a>
+    <a class="nav-link" href="workflow-customize-security-policies.html">Customize security policies on the server</a>
   </li>
   <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
+    <a class="nav-link" href="workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
-  <li class="nav-item" data-depth="2">
-    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  <li class="nav-item is-current-page" data-depth="2">
+    <a class="nav-link" href="workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
   </li>
 </ul>
   </li>
@@ -2144,14 +2184,14 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 <nav class="breadcrumbs" aria-label="breadcrumbs">
 <ul>
       <li>
-          <a href="client-config-overview.html" class="book-link">
-            <span class="book-text">Client Configuration Guide</span>
+          <a href="common-workflows-overview.html" class="book-link">
+            <span class="book-text">Common Workflows</span>
             <img class="book-icon" src="../../_/img/book.svg" alt="Book" width="20" height="20">
           </a>
       </li>
   </ul>
 </nav>
-  <div class="edit-this-page"><a href="file:///docs/translations/en/modules/client-configuration/pages/bootstrap-repository.adoc"><strong>Edit</strong></a></div>
+  <div class="edit-this-page"><a href="file:///docs/translations/en/modules/common-workflows/pages/workflow-cert-rotation-acme.adoc"><strong>Edit</strong></a></div>
 
       <div class="navbar-item search hide-for-print">
         <div id="search-field" class="field">
@@ -2169,124 +2209,70 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
     <!-- end qualtrics -->
   </div>
 </aside><article class="doc">
-<h1 class="page">Bootstrap repository</h1>
+<h1 class="page">Set up and rotate certificates using ACME</h1>
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>A bootstrap repository contains required packages for registering clients during bootstrapping.
-When products are synchronized, bootstrap repositories are automatically created and regenerated on the SUSE Multi-Linux Manager Server.</p>
+<p>Set up and automatically rotate third-party SSL/TLS certificates using the ACME protocol (such as Let&#8217;s Encrypt) on containerized installations.</p>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_prepare_to_create_a_bootstrap_repository"><a class="anchor" href="#_prepare_to_create_a_bootstrap_repository"></a><a class="link" href="#_prepare_to_create_a_bootstrap_repository">1. Prepare to create a bootstrap repository</a></h2>
+<h2 id="_use_case"><a class="anchor" href="#_use_case"></a><a class="link" href="#_use_case">1. Use case</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>When you select a product for synchronization, the bootstrap repository is automatically created as soon as all mandatory channels are fully mirrored.</p>
+<p>Configure ACME certificate rotation to:</p>
 </div>
-<div class="quoteblock procedure">
-<div class="title">Procedure: Checking synchronization progress from the Web UI</div>
-<blockquote>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>In the SUSE Multi-Linux Manager Web UI, navigate to <span class="menuseq"><b class="menu">Admin</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Setup Wizard</b></span> and select the <code>Products</code> tab.
-This dialog displays a completion bar for each product when they are being synchronized.</p>
+<p>Secure the containerized server with valid public CA-signed certificates.</p>
 </li>
 <li>
-<p>Alternatively, you can navigate to <span class="menuseq"><b class="menu">Software</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Manage</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Channels</b></span>, then click the channel associated to the repository.
-Navigate to the <code>Repositories</code> tab, then click <code>Sync</code> and check <code>Sync Status</code>.</p>
-</li>
-</ol>
-</div>
-</blockquote>
-</div>
-<div class="quoteblock procedure">
-<div class="title">Procedure: Checking synchronization progress from the command prompt</div>
-<blockquote>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>To list available logs before tailing, on the container host, run the following command:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mgrctl exec ls /var/log/rhn/reposync/</code></pre>
-</div>
-</div>
+<p>Automate certificate renewal and rotation to prevent downtime.</p>
 </li>
 <li>
-<p>At the command prompt on the SUSE Multi-Linux Manager container host, as root, check the synchronization of a channel log file:</p>
-<div class="listingblock">
-<div class="content">
-<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mgrctl exec -ti -- tail -f /var/log/rhn/reposync/&lt;channel-label&gt;.log</code></pre>
-</div>
-</div>
+<p>Use the same CA and certificate chain for both server and database containers.</p>
 </li>
-<li>
-<p>Each child channel generates its own log during the synchronization progress.
-You need to check all the base and child channel log files to be sure that the synchronization is complete.</p>
-</li>
-</ol>
-</div>
-</blockquote>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_options_for_automatic_mode"><a class="anchor" href="#_options_for_automatic_mode"></a><a class="link" href="#_options_for_automatic_mode">2. Options for automatic mode</a></h2>
+<h2 id="_outcome"><a class="anchor" href="#_outcome"></a><a class="link" href="#_outcome">2. Outcome</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>You can change how the automated bootstrap repository creation works.
-This section details the various settings.</p>
-</div>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Flush mode</dt>
-<dd>
-<p>By default, existing repositories are updated only with the latest packages.
-You can configure it to always start with an empty repository instead.
-To enable this behavior, add or edit this value in <code>/etc/rhn/rhn.conf</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre>server.susemanager.bootstrap_repo_flush = 1</pre>
+<p>The containerized server uses valid public certificates that automatically rotate on renewal, updating Podman secrets and restarting services without manual intervention.</p>
 </div>
 </div>
-</dd>
-<dt class="hdlist1">Automatic mode</dt>
-<dd>
-<p>By default, automated regeneration of the bootstrap repositories is enabled.
-To disable it, add or edit this value in <code>/etc/rhn/rhn.conf</code>:</p>
-<div class="listingblock">
-<div class="content">
-<pre>server.susemanager.auto_generate_bootstrap_repo = 0</pre>
 </div>
-</div>
-</dd>
-</dl>
-</div>
-<div class="sect2">
-<h3 id="_configure_bootstrap_data_file"><a class="anchor" href="#_configure_bootstrap_data_file"></a><a class="link" href="#_configure_bootstrap_data_file">2.1. Configure bootstrap data file</a></h3>
+<div class="sect1">
+<h2 id="_preparation"><a class="anchor" href="#_preparation"></a><a class="link" href="#_preparation">3. Preparation</a></h2>
+<div class="sectionbody">
 <div class="paragraph">
-<p>The tool uses a data file with information about which packages are required for each distribution.
-The data file is stored at <code>/usr/share/susemanager/mgr_bootstrap_data.py</code>.
-SUSE updates this file regularly.
-If you want to makes changes to this file, do not edit it directly.
-Instead, create a copy in persistent directory and edit your copy:</p>
+<p>Ensure you have:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>cp /usr/share/susemanager/mgr_bootstrap_data.py /srv/susemanager/my_data.py</pre>
+<div class="ulist">
+<ul>
+<li>
+<p>Root access to the server container host.</p>
+</li>
+<li>
+<p>The <code>acme.sh</code> tool installed on the host.</p>
+</li>
+<li>
+<p>An active DNS challenge provider configured in <code>acme.sh</code> for the server FQDN.</p>
+</li>
+<li>
+<p>The fully qualified domain name (FQDN) of your server.</p>
+</li>
+</ul>
 </div>
 </div>
-<div class="paragraph">
-<p>When you have made your changes, configure SUSE Multi-Linux Manager to use the new file.
-Add or edit this value in <code>/etc/rhn/rhn.conf</code>:</p>
 </div>
-<div class="listingblock">
-<div class="content">
-<pre>server.susemanager.bootstrap_repo_datamodule = my_data</pre>
-</div>
-</div>
+<div class="sect1">
+<h2 id="_step_by_step_workflow_instructions"><a class="anchor" href="#_step_by_step_workflow_instructions"></a><a class="link" href="#_step_by_step_workflow_instructions">4. Step-by-step workflow instructions</a></h2>
+<div class="sectionbody">
 <div class="admonitionblock important">
 <table>
 <tr>
@@ -2295,8 +2281,85 @@ Add or edit this value in <code>/etc/rhn/rhn.conf</code>:</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>On the next update, the new data from SUSE overwrites the original data file, not the new one.
-You need to keep the new file up to date with changes provided by SUSE.</p>
+<p>If using an intermediate CA, the certificate file must contain the server certificate first, followed by all intermediate CAs in order.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+<div class="quoteblock procedure">
+<div class="title">Procedure: Configuring ACME certificate rotation</div>
+<blockquote>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Open a terminal on the server container host as <code>root</code>.</p>
+</li>
+<li>
+<p>Create the certificate directory:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">mkdir -p /root/ssl-build</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Export the DNS challenge credentials. For example, for Cloudflare:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">export CF_Token="your_cloudflare_api_token"
+export CF_Account_ID="your_cloudflare_account_id"</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>Replace with credentials for your specific DNS provider.</p>
+</div>
+</td>
+</tr>
+</table>
+</div>
+</li>
+<li>
+<p>Issue the certificate and define <code>--reloadcmd</code> to rotate the certificates using <code>mgradm ssl rotate</code> on renewal:</p>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-shell hljs" data-lang="shell">./acme.sh \
+   --issue \
+   --force \
+   --dns dns_cf \
+   --keylength 4096 \
+   --domain &lt;SERVER_FQDN&gt; \
+   --cert-file /root/ssl-build/server.crt \
+   --key-file /root/ssl-build/server.key \
+   --ca-file /root/ssl-build/ca.pem \
+   --fullchain-file /root/ssl-build/fullchain.pem \
+   --reloadcmd "mgradm ssl rotate --ssl-ca-root /root/ssl-build/ca.pem --ssl-server-cert /root/ssl-build/fullchain.pem --ssl-server-key /root/ssl-build/server.key"</code></pre>
+</div>
+</div>
+</li>
+<li>
+<p>Verify the initial run completes successfully, updating the server and database certificates and restarting the services.</p>
+</li>
+</ol>
+</div>
+</blockquote>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<div class="paragraph">
+<p>The <code>mgradm ssl rotate</code> command automatically reads the server CA, certificate, and key, updates both the server (<code>uyuni-ca</code>, <code>uyuni-cert</code>, <code>uyuni-key</code>) and database (<code>uyuni-db-ca</code>, <code>uyuni-db-cert</code>, <code>uyuni-db-key</code>) secrets, and restarts the services.</p>
 </div>
 </td>
 </tr>
@@ -2304,120 +2367,42 @@ You need to keep the new file up to date with changes provided by SUSE.</p>
 </div>
 </div>
 </div>
-</div>
 <div class="sect1">
-<h2 id="_manually_generate_a_bootstrap_repository"><a class="anchor" href="#_manually_generate_a_bootstrap_repository"></a><a class="link" href="#_manually_generate_a_bootstrap_repository">3. Manually generate a bootstrap repository</a></h2>
+<h2 id="_troubleshooting_ca_password_prompt_during_upgrades"><a class="anchor" href="#_troubleshooting_ca_password_prompt_during_upgrades"></a><a class="link" href="#_troubleshooting_ca_password_prompt_during_upgrades">5. Troubleshooting: CA password prompt during upgrades</a></h2>
 <div class="sectionbody">
 <div class="paragraph">
-<p>By default, bootstrap repositories are regenerated daily.
-You can manually create the bootstrap repository from the command prompt.</p>
+<p>If upgrading a legacy server to a split database release (such as 2025.05), <code>mgradm</code> prompts for the CA password to sign database certificates.</p>
 </div>
-<div class="quoteblock procedure">
-<div class="title">Procedure: Generating the bootstrap repository for SUSE Linux Enterprise</div>
-<blockquote>
-<div class="olist arabic">
-<ol class="arabic">
+<div class="ulist">
+<ul>
 <li>
-<p>At the command prompt on the SUSE Multi-Linux Manager Server, as root, list the available distributions to create bootstrap repositories for:</p>
-<div class="listingblock">
-<div class="content">
-<pre>mgr-create-bootstrap-repo -l</pre>
-</div>
-</div>
+<p><strong>Self-signed certificates</strong>: Retrieve the password from <code>/var/lib/containers/storage/volumes/root/_data/spacewalk-answers</code> (<code>ssl-password</code> value).</p>
 </li>
 <li>
-<p>Create the bootstrap repository, using the appropriate repository name as the product label:</p>
-<div class="listingblock">
-<div class="content">
-<pre>mgr-create-bootstrap-repo -c SLE-version-x86_64</pre>
-</div>
-</div>
+<p><strong>Third-party/ACME certificates</strong>: No password is required. Pass <code>--ssl-db-*</code> flags to the upgrade command, or let the upgrade complete using self-signed placeholders and then update secrets using this guide.</p>
 </li>
-<li>
-<p>Alternatively, use the number shown next to the distribution name in the list of available distributions.</p>
-</li>
-</ol>
-</div>
-</blockquote>
-</div>
-<div class="paragraph">
-<p>The client repository is located in <code>/srv/www/htdocs/pub/repositories/</code>.</p>
-</div>
-<div class="paragraph">
-<p>If you have mirrored more than one product (for example, SLES and SLES for SAP), or if you use custom channels, you might need to specify the parent channel to use when creating the bootstrap repository.
-This is not required in every situation.
-For example, some SLES&#160;15 versions have common code bases, so there is no need to specify a parent channel.
-Use this procedure only if your environment requires it.</p>
-</div>
-<div class="quoteblock procedure">
-<div class="title">OPTIONAL Procedure: Specifying a parent channel for a bootstrap repository</div>
-<blockquote>
-<div class="olist arabic">
-<ol class="arabic">
-<li>
-<p>Check which parent channels you have available:</p>
-<div class="listingblock">
-<div class="content">
-<pre>mgr-create-bootstrap-repo -c SLE-15-x86_64
-Multiple options for parent channel found. Please use option
---with-parent-channel &lt;label&gt; and choose one of:
-- sle-product-sles15-pool-x86_64
-- sle-product-sles_sap15-pool-x86_64
-- sle-product-sled15-pool-x86_64</pre>
-</div>
-</div>
-</li>
-<li>
-<p>Specify the appropriate parent channel:</p>
-<div class="listingblock">
-<div class="content">
-<pre>mgr-create-bootstrap-repo -c SLE-15-x86_64 --with-parent-channel sle-product-sled15-pool-x86_64</pre>
-</div>
-</div>
-</li>
-</ol>
-</div>
-</blockquote>
-</div>
-<div class="sect2">
-<h3 id="_repositories_with_multiple_architectures"><a class="anchor" href="#_repositories_with_multiple_architectures"></a><a class="link" href="#_repositories_with_multiple_architectures">3.1. Repositories with multiple architectures</a></h3>
-<div class="paragraph">
-<p>If you are creating bootstrap repositories that include multiple different architectures, you need to be careful that all architectures are updated correctly.
-For example, the x86-64 and IBM Z architectures for SLE use the same bootstrap repository URL at <code>/srv/www/htdocs/pub/repositories/sle/15/2/bootstrap/</code>.</p>
-</div>
-<div class="paragraph">
-<p>When the <code>flush</code> option is enabled, and you attempt to generate the bootstrap repository for multiple architectures, only one architecture is generated.
-To avoid this, use the <code>--no-flush</code> option at the command prompt when creating additional architectures.
-For example:</p>
-</div>
-<div class="listingblock">
-<div class="content">
-<pre>mgr-create-bootstrap-repo -c SLE-15-SP2-x86_64
-mgr-create-bootstrap-repo --no-flush -c SLE-15-SP2-s390x</pre>
-</div>
-</div>
+</ul>
 </div>
 </div>
 </div>
 <div class="sect1">
-<h2 id="_bootstrap_and_custom_channels"><a class="anchor" href="#_bootstrap_and_custom_channels"></a><a class="link" href="#_bootstrap_and_custom_channels">4. Bootstrap and custom channels</a></h2>
+<h2 id="_related_topics"><a class="anchor" href="#_related_topics"></a><a class="link" href="#_related_topics">6. Related topics</a></h2>
 <div class="sectionbody">
-<div class="paragraph">
-<p>If you are using custom channels, you can use the <code>--with-custom-channels</code> option with the <code>mgr-create-bootstrap-repo</code> command.
-In this case, you also need to specify the parent channel to use.</p>
-</div>
-<div class="paragraph">
-<p>Automatic creation of a bootstrap repository might fail if you are using custom channels.
-In this case, you need to create the repository manually.</p>
-</div>
-<div class="paragraph">
-<p>For more information about custom channels, see <a href="../administration/custom-channels.html" class="xref page">Custom Channels</a>.</p>
+<div class="ulist">
+<ul>
+<li>
+<p>For details on importing custom certificates, see <a href="../administration/ssl-certs-imported.html" class="xref page">Import SSL Certificates</a>.</p>
+</li>
+<li>
+<p>For CA migration information, see <a href="../administration/ssl-certs-ca-migration.html" class="xref page">Migrate SSL Certificate Authorities</a>.</p>
+</li>
+</ul>
 </div>
 </div>
 </div>
 <nav class="pagination">
-  <span class="prev"><a href="appstreams.html">AppStreams</a></span>
-  <span class="next"><a href="activation-keys.html">Activation Keys</a></span>
+  <span class="prev"><a href="workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a></span>
+  <span class="next"><a href="../specialized-guides/specialized-guides-overview.html">Specialized Guides</a></span>
 </nav>
 </article>
   </div>

@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2199,9 +2202,19 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
 </li>
 </ul>
 </div>
-<div class="paragraph">
-<p>Create a protected environment file for the server configuration:</p>
 </div>
+</div>
+<div class="sect1">
+<h2 id="_client_managed_container_with_stdio"><a class="anchor" href="#_client_managed_container_with_stdio"></a><a class="link" href="#_client_managed_container_with_stdio">2. Client-managed container with stdio</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In this model, the MCP client starts the container and communicates with it over stdio.
+No host port is published.</p>
+</div>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p>Create a protected environment file for the server configuration:</p>
 <div class="listingblock">
 <div class="content">
 <pre class="highlightjs highlight"><code class="language-ini hljs" data-lang="ini">UYUNI_SERVER=https://server.example.com
@@ -2215,18 +2228,9 @@ UYUNI_MCP_WRITE_TOOLS_ENABLED=false</code></pre>
 <p>Restrict access to this file because it contains credentials.
 See <a href="mcp-server-configuration.html" class="xref page">Server Configuration</a> for all settings.</p>
 </div>
-</div>
-</div>
-<div class="sect1">
-<h2 id="_client_managed_container_with_stdio"><a class="anchor" href="#_client_managed_container_with_stdio"></a><a class="link" href="#_client_managed_container_with_stdio">2. Client-managed container with stdio</a></h2>
-<div class="sectionbody">
-<div class="paragraph">
-<p>In this model, the MCP client starts the container and communicates with it over stdio.
-No host port is published.</p>
-</div>
-<div class="paragraph">
+</li>
+<li>
 <p>Configure the MCP client to run:</p>
-</div>
 <div class="listingblock">
 <div class="content">
 <pre>podman run -i --rm \
@@ -2237,6 +2241,9 @@ No host port is published.</p>
 <div class="paragraph">
 <p>Replace <code>&lt;version&gt;</code> with a tested release tag.
 Pin a release tag instead of using <code>latest</code> in a production configuration.</p>
+</div>
+</li>
+</ol>
 </div>
 <div class="paragraph">
 <p>Continue with <a href="mcp-server-client-configuration.html#client-stdio" class="xref page">stdio client configuration</a>.</p>
@@ -2252,15 +2259,22 @@ Pin a release tag instead of using <code>latest</code> in a production configura
 <div class="olist arabic">
 <ol class="arabic">
 <li>
-<p>Add these settings to the environment file:</p>
+<p>Create a protected environment file for the server configuration:</p>
 <div class="listingblock">
 <div class="content">
-<pre>UYUNI_MCP_TRANSPORT=http
+<pre>UYUNI_SERVER=https://server.example.com
+UYUNI_MCP_SSL_VERIFY=true
+UYUNI_MCP_WRITE_TOOLS_ENABLED=false
+UYUNI_MCP_TRANSPORT=http
 UYUNI_MCP_HOST=0.0.0.0
 UYUNI_MCP_PORT=8000
 UYUNI_MCP_PUBLIC_URL=https://mcp.example.com
 UYUNI_AUTH_SERVER=https://idp.example.com/realms/mcp</pre>
 </div>
+</div>
+<div class="paragraph">
+<p>When <code>UYUNI_AUTH_SERVER</code> is set, the MCP Server uses each client&#8217;s OAuth token to authenticate to the SUSE Multi-Linux Manager API.
+In this configuration, <code>UYUNI_USER</code> and <code>UYUNI_PASS</code> are not required.</p>
 </div>
 </li>
 <li>
@@ -2299,7 +2313,7 @@ Do not expose it directly to an untrusted network.</p>
 </td>
 <td class="content">
 <div class="paragraph">
-<p>If <code>UYUNI_AUTH_SERVER</code> is not set, HTTP requests are unauthenticated.
+<p>If <code>UYUNI_AUTH_SERVER</code> is not set, HTTP requests to the MCP Server are unauthenticated.
 Only omit authentication for temporary testing on an isolated interface or network.</p>
 </div>
 </td>

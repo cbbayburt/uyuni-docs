@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2256,7 +2259,7 @@ web.oidc.idp.issuer = https://idp.example.com/realms/mcp</pre>
 <p>If the path is not set, SUSE Multi-Linux Manager discovers it from the issuer&#8217;s <code>/.well-known/openid-configuration</code> document.</p>
 </div>
 <div class="paragraph">
-<p>The default SUSE Multi-Linux Manager audience and user-name claim are:</p>
+<p>The default SUSE Multi-Linux Manager audience and username claim are:</p>
 </div>
 <div class="listingblock">
 <div class="content">
@@ -2276,7 +2279,7 @@ web.oidc.jwt.username_claim = preferred_username</pre>
 <p>A <code>sub</code> claim.</p>
 </li>
 <li>
-<p>A configured user-name claim whose value matches an existing active SUSE Multi-Linux Manager user.</p>
+<p>A configured username claim whose value matches an existing active SUSE Multi-Linux Manager user.</p>
 </li>
 </ul>
 </div>

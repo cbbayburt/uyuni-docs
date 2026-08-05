@@ -9,7 +9,7 @@
     <link rel="next" href="vhm-aws.html">
     <meta name="generator" content="Antora 3.1.14">
     <link rel="stylesheet" href="../../_/css/site.css">
-<meta http-equiv="last-modified" content="2025-04-15"/>
+<meta http-equiv="last-modified" content="2026-08-03"/>
 <link rel="stylesheet" href="../../_/css/search.css">
 <link rel="icon" href="../../_/img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="../../_/css/font-styles.css">
@@ -1772,6 +1772,9 @@ searchUnifyChatbot ("Ask Geeko") Copyright ©2024 Grazitti Interactive - All Rig
   <li class="nav-item" data-depth="2">
     <a class="nav-link" href="../common-workflows/workflow-product-upgrade-webui.html">Product Upgrade via Web UI</a>
   </li>
+  <li class="nav-item" data-depth="2">
+    <a class="nav-link" href="../common-workflows/workflow-cert-rotation-acme.html">Set up and rotate certificates using ACME</a>
+  </li>
 </ul>
   </li>
 </ul>
@@ -2184,7 +2187,7 @@ You can also use a VHM to manage clusters created with Kubernetes.</p>
 <div class="ulist">
 <ul>
 <li>
-<p>For more information on using a VHM with Amazon Web Services, see <a href="vhm-aws.html" class="xref page">Virtual Host Manager and Amazon Web Services</a>.</p>
+<p>For more information on using a VHM with Amazon Web Services, see <a href="vhm-aws.html" class="xref page">Virtual Host Manager and Amazon Web Services</a>.</p>
 </li>
 <li>
 <p>For more information on using a VHM with Microsoft Azure, see <a href="vhm-azure.html" class="xref page">Virtual Host Manager and Azure</a>.</p>
@@ -2199,6 +2202,17 @@ You can also use a VHM to manage clusters created with Kubernetes.</p>
 <p>For more information on using a VHM with other hosts, see <a href="vhm-file.html" class="xref page">Virtualization with Other Third Party Providers</a>.</p>
 </li>
 </ul>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="_direct_hypervisor_querying"><a class="anchor" href="#_direct_hypervisor_querying"></a><a class="link" href="#_direct_hypervisor_querying">1. Direct Hypervisor Querying</a></h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Registered physical Linux clients acting as hypervisors (such as KVM) do not require a Virtual Host Manager (VHM) configuration. Instead, if a registered physical host has the <code>Virtualization Host</code> add-on system type assigned, SUSE Multi-Linux Manager queries the system directly using <code>libvirt</code> to gather virtual machine data.</p>
+</div>
+<div class="paragraph">
+<p>For more information, see <a href="system-types.html" class="xref page">System Types</a>.</p>
 </div>
 </div>
 </div>
